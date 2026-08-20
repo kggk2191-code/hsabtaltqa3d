@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة مستحقات نهاية الخدمة والتقاعد | الأداة المجانية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background: #0b0f19; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; align-items: center; position: relative; overflow-x: hidden; }
+        
+        .glow-1 { position: absolute; width: 350px; height: 350px; background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(0,0,0,0) 70%); top: 10%; left: 50%; transform: translate(-50%, -50%); z-index: 0; filter: blur(70px); }
+        .glow-2 { position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(0,0,0,0) 70%); bottom: 20%; left: 50%; transform: translate(-50%, 50%); z-index: 0; filter: blur(70px); }
+
+        .container { position: relative; z-index: 1; width: 92%; max-width: 500px; margin: 2rem auto; }
+        
+        .card { background: rgba(18, 24, 38, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(20px); padding: 2rem 1.5rem; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); text-align: center; }
+        
+        .badge { display: inline-block; padding: 4px 14px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 20px; color: #34d399; font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; }
+        
+        h1 { font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem; background: linear-gradient(135deg, #ffffff 0%, #34d399 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p.subtitle { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+        .input-group { text-align: right; margin-bottom: 1.2rem; }
+        label { display: block; font-size: 0.88rem; color: #cbd5e1; margin-bottom: 6px; font-weight: 600; }
+        input, select { width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #1e293b; background: rgba(15, 23, 42, 0.9); color: #fff; font-size: 1rem; outline: none; transition: 0.3s; font-weight: 600; }
+        input:focus, select:focus { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.3); }
+
+        button { width: 100%; padding: 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%); color: white; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 0.5rem; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
+        button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4); }
+
+        .result-box { display: none; margin-top: 1.5rem; padding: 1.5rem; background: rgba(15, 23, 42, 0.95); border-radius: 16px; border: 1px solid rgba(16, 185, 129, 0.4); text-align: center; animation: fadeIn 0.4s ease; }
+        .result-title { color: #94a3b8; font-size: 0.9rem; margin-bottom: 5px; }
+        .result-amount { font-size: 2.2rem; font-weight: 900; color: #34d399; text-shadow: 0 0 10px rgba(52, 211, 153, 0.3); }
+
+        .article-section { margin-top: 2rem; background: rgba(18, 24, 38, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 20px; color: #94a3b8; font-size: 0.9rem; line-height: 1.7; text-align: right; }
+        .article-section h2 { color: #f8fafc; font-size: 1.1rem; margin-bottom: 0.8rem; }
+
+        footer { margin-top: auto; padding: 2rem 1rem; text-align: center; color: #64748b; font-size: 0.85rem; width: 100%; }
+        footer a { color: #94a3b8; text-decoration: none; margin: 0 8px; }
+        footer a:hover { color: #34d399; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <div class="container">
+        <div class="card">
+            <span class="badge">💰 حاسبة معتمدة ومجانية</span>
+            <h1>حاسبة مستحقات نهاية الخدمة</h1>
+            <p class="subtitle">احسب مكافأتك المالية ومستحقاتك التقاعدية بدقة وبضغطة زر</p>
+
+            <div class="input-group">
+                <label>الراتب الفعلي الأخير (بالريال)</label>
+                <input type="number" id="salary" placeholder="مثال: 8000">
+            </div>
+
+            <div class="input-group">
+                <label>عدد سنوات الخدمة</label>
+                <input type="number" id="years" placeholder="مثال: 6">
+            </div>
+
+            <div class="input-group">
+                <label>سبب إنهاء الخدمة</label>
+                <select id="reason">
+                    <option value="full">فسخ عقد / انتهاء عقد / إقالة</option>
+                    <option value="resign">استقالة بطلب الموظف</option>
+                </select>
+            </div>
+
+            <button onclick="calculateReward()">احسب المستحقات الآن 🚀</button>
+
+            <div class="result-box" id="resultCard">
+                <div class="result-title">المبلغ المستحق التقديري:</div>
+                <div class="result-amount" id="finalAmount">0 ريال</div>
+            </div>
+        </div>
+
+        <div class="article-section">
+            <h2>كيف يتم حساب مكافأة نهاية الخدمة؟</h2>
+            <p>تُحسب مكافأة نهاية الخدمة بناءً على آخر راتب تقاضاه الموظف وعدد سنوات العمل. وفقاً لنظام العمل: تستحق أجر نصف شهر عن كل سنة من السنوات الخمس الأولى، وأجر شهر كامل عن كل سنة من السنوات التالية. في حال الاستقالة أقل من سنتين لا تستحق المكافأة، ومن سنتين إلى 5 سنوات تستحق ثلث المكافأة.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© جميع الحقوق محفوظة - حاسبة مكافأة نهاية الخدمة</p>
+        <p style="margin-top: 8px;">
+            <a href="#">سياسة الخصوصية</a> | 
+            <a href="#">شروط الاستخدام</a> | 
+            <a href="#">اتصل بنا</a>
+        </p>
+    </footer>
+
+    <script>
+        function calculateReward() {
+            const salary = parseFloat(document.getElementById('salary').value);
+            const years = parseFloat(document.getElementById('years').value);
+            const reason = document.getElementById('reason').value;
+
+            if (!salary || !years || salary <= 0 || years <= 0) {
+                alert('لطفاً أدخل الراتب وعدد السنوات بشكل صحيح!');
+                return;
+            }
+
+            let baseReward = 0;
+            if (years <= 5) {
+                baseReward = (salary / 2) * years;
+            } else {
+                baseReward = ((salary / 2) * 5) + (salary * (years - 5));
+            }
+
+            let finalReward = baseReward;
+            if (reason === 'resign') {
+                if (years < 2) {
+                    finalReward = 0;
+                } else if (years >= 2 && years < 5) {
+                    finalReward = baseReward * (1 / 3);
+                } else if (years >= 5 && years < 10) {
+                    finalReward = baseReward * (2 / 3);
+                } else {
+                    finalReward = baseReward;
+                }
+            }
+
+            document.getElementById('finalAmount').innerText = Math.round(finalReward).toLocaleString('ar-SA') + ' ريال';
+            document.getElementById('resultCard').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
