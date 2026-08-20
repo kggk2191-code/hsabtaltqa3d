@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <!-- كود Google AdSense الخاص بحسابك -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9207069262107638"
+     crossorigin="anonymous"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة مستحقات نهاية الخدمة والتقاعد | الأداة المجانية</title>
+    <title>حاسبة مستحقات نهاية الخدمة والتقاعد المعتمدة | نظام العمل السعودي</title>
+    <meta name="description" content="أداة مجانية ودقيقة لحساب مكافأة نهاية الخدمة والمستحقات التقاعدية حسب نظام العمل السعودي الجديد.">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
@@ -12,7 +17,7 @@
         .glow-1 { position: absolute; width: 350px; height: 350px; background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(0,0,0,0) 70%); top: 10%; left: 50%; transform: translate(-50%, -50%); z-index: 0; filter: blur(70px); }
         .glow-2 { position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(0,0,0,0) 70%); bottom: 20%; left: 50%; transform: translate(-50%, 50%); z-index: 0; filter: blur(70px); }
 
-        .container { position: relative; z-index: 1; width: 92%; max-width: 500px; margin: 2rem auto; }
+        .container { position: relative; z-index: 1; width: 92%; max-width: 550px; margin: 2rem auto; }
         
         .card { background: rgba(18, 24, 38, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(20px); padding: 2rem 1.5rem; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); text-align: center; }
         
@@ -26,19 +31,29 @@
         input, select { width: 100%; padding: 14px; border-radius: 12px; border: 2px solid #1e293b; background: rgba(15, 23, 42, 0.9); color: #fff; font-size: 1rem; outline: none; transition: 0.3s; font-weight: 600; }
         input:focus, select:focus { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.3); }
 
-        button { width: 100%; padding: 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%); color: white; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 0.5rem; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
-        button:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4); }
+        .btn-calc { width: 100%; padding: 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%); color: white; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 0.5rem; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
+        .btn-calc:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(16, 185, 129, 0.4); }
 
         .result-box { display: none; margin-top: 1.5rem; padding: 1.5rem; background: rgba(15, 23, 42, 0.95); border-radius: 16px; border: 1px solid rgba(16, 185, 129, 0.4); text-align: center; animation: fadeIn 0.4s ease; }
         .result-title { color: #94a3b8; font-size: 0.9rem; margin-bottom: 5px; }
-        .result-amount { font-size: 2.2rem; font-weight: 900; color: #34d399; text-shadow: 0 0 10px rgba(52, 211, 153, 0.3); }
+        .result-amount { font-size: 2.2rem; font-weight: 900; color: #34d399; text-shadow: 0 0 10px rgba(52, 211, 153, 0.3); margin-bottom: 1rem; }
 
-        .article-section { margin-top: 2rem; background: rgba(18, 24, 38, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 20px; color: #94a3b8; font-size: 0.9rem; line-height: 1.7; text-align: right; }
-        .article-section h2 { color: #f8fafc; font-size: 1.1rem; margin-bottom: 0.8rem; }
+        .action-btns { display: flex; gap: 10px; justify-content: center; }
+        .btn-share { flex: 1; padding: 10px; border-radius: 10px; border: none; background: #25D366; color: white; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+        .btn-copy { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid #3b82f6; background: rgba(59, 130, 246, 0.1); color: #60a5fa; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+
+        .article-section { margin-top: 2rem; background: rgba(18, 24, 38, 0.6); border: 1px solid rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 20px; color: #94a3b8; font-size: 0.9rem; line-height: 1.8; text-align: right; }
+        .article-section h2 { color: #f8fafc; font-size: 1.1rem; margin-bottom: 0.8rem; margin-top: 1rem; }
+        .article-section h2:first-child { margin-top: 0; }
 
         footer { margin-top: auto; padding: 2rem 1rem; text-align: center; color: #64748b; font-size: 0.85rem; width: 100%; }
-        footer a { color: #94a3b8; text-decoration: none; margin: 0 8px; }
+        footer a { color: #94a3b8; text-decoration: none; margin: 0 8px; cursor: pointer; }
         footer a:hover { color: #34d399; }
+
+        /* Modal الخصوصية */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100; justify-content: center; align-items: center; padding: 1rem; }
+        .modal-content { background: #121826; padding: 2rem; border-radius: 20px; max-width: 500px; text-align: right; max-height: 80vh; overflow-y: auto; border: 1px solid rgba(255,255,255,0.1); }
+        .close-btn { background: #fe2c55; border: none; color: white; padding: 6px 16px; border-radius: 8px; cursor: pointer; float: left; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -50,52 +65,74 @@
 
     <div class="container">
         <div class="card">
-            <span class="badge">💰 حاسبة معتمدة ومجانية</span>
+            <span class="badge">💰 حاسبة معتمدة 100%</span>
             <h1>حاسبة مستحقات نهاية الخدمة</h1>
-            <p class="subtitle">احسب مكافأتك المالية ومستحقاتك التقاعدية بدقة وبضغطة زر</p>
+            <p class="subtitle">حساب دقيق للمكافأة والتقاعد وفق المادة 84 و 85 من نظام العمل</p>
 
             <div class="input-group">
-                <label>الراتب الفعلي الأخير (بالريال)</label>
-                <input type="number" id="salary" placeholder="مثال: 8000">
+                <label>الراتب الفعلي الأخير (الأساسي + السكن + المواصلات)</label>
+                <input type="number" id="salary" placeholder="مثال: 9500">
             </div>
 
             <div class="input-group">
-                <label>عدد سنوات الخدمة</label>
+                <label>عدد سنوات الخدمة كاملة</label>
                 <input type="number" id="years" placeholder="مثال: 6">
             </div>
 
             <div class="input-group">
-                <label>سبب إنهاء الخدمة</label>
+                <label>سبب إنهاء العلاقة التعاقدية</label>
                 <select id="reason">
-                    <option value="full">فسخ عقد / انتهاء عقد / إقالة</option>
-                    <option value="resign">استقالة بطلب الموظف</option>
+                    <option value="full">إنهاء عقد / إقالة / عدم تجديد من الشركة</option>
+                    <option value="resign">استقالة بطلب من الموظف</option>
                 </select>
             </div>
 
-            <button onclick="calculateReward()">احسب المستحقات الآن 🚀</button>
+            <button class="btn-calc" onclick="calculateReward()">احسب المستحقات الآن 🚀</button>
 
             <div class="result-box" id="resultCard">
-                <div class="result-title">المبلغ المستحق التقديري:</div>
+                <div class="result-title">مكافأة نهاية الخدمة المستحقة:</div>
                 <div class="result-amount" id="finalAmount">0 ريال</div>
+                
+                <div class="action-btns">
+                    <button class="btn-share" onclick="shareWhatsapp()">مشاركة عبر الواتساب 📲</button>
+                    <button class="btn-copy" onclick="copyResult()">نسخ النتيجة 📋</button>
+                </div>
             </div>
         </div>
 
+        <!-- مقال متوافق مع شروط Google AdSense -->
         <div class="article-section">
-            <h2>كيف يتم حساب مكافأة نهاية الخدمة؟</h2>
-            <p>تُحسب مكافأة نهاية الخدمة بناءً على آخر راتب تقاضاه الموظف وعدد سنوات العمل. وفقاً لنظام العمل: تستحق أجر نصف شهر عن كل سنة من السنوات الخمس الأولى، وأجر شهر كامل عن كل سنة من السنوات التالية. في حال الاستقالة أقل من سنتين لا تستحق المكافأة، ومن سنتين إلى 5 سنوات تستحق ثلث المكافأة.</p>
+            <h2>كيف تحسب مكافأة نهاية الخدمة؟</h2>
+            <p>تستحق مكافأة نهاية الخدمة بناءً على أجر الموظف الأخير وتُحسب كالتالي: أجر نصف شهر عن كل سنة من السنوات الخمس الأولى، وأجر شهر كامل عن كل سنة تالية.</p>
+
+            <h2>حالات الاستقالة ونسبة المستحقات</h2>
+            <p>• أقل من سنتين: لا تستحق مكافأة.<br>
+               • من 2 إلى 5 سنوات: تستحق ثلث المكافأة (1/3).<br>
+               • من 5 إلى 10 سنوات: تستحق ثلثي المكافأة (2/3).<br>
+               • أكثر من 10 سنوات: تستحق المكافأة كاملة.</p>
+        </div>
+    </div>
+
+    <!-- نافذة سياسة الخصوصية لضمان القبول في AdSense -->
+    <div class="modal" id="privacyModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closePrivacy()">إغلاق</button>
+            <h3 style="margin-bottom: 1rem; color: #34d399;">سياسة الخصوصية</h3>
+            <p style="font-size: 0.85rem; color: #a1a1aa; line-height: 1.6;">نحن نحترم خصوصيتك. جميع البيانات التي تدخلها في حاسبة مستحقات نهاية الخدمة يتم معالجتها محلياً داخل متصفحك ولا يتم حفظها أو مشاركتها مع أي طرف ثالث. نستخدم إعلانات Google AdSense لتغطية تكاليف التشغيل.</p>
         </div>
     </div>
 
     <footer>
-        <p>© جميع الحقوق محفوظة - حاسبة مكافأة نهاية الخدمة</p>
+        <p>© جميع الحقوق محفوظة - أداة حاسبة التقاعد والمستحقات</p>
         <p style="margin-top: 8px;">
-            <a href="#">سياسة الخصوصية</a> | 
-            <a href="#">شروط الاستخدام</a> | 
-            <a href="#">اتصل بنا</a>
+            <a onclick="showPrivacy()">سياسة الخصوصية</a> | 
+            <a onclick="alert('للتواصل والاستفسار: support@calc-app.com')">اتصل بنا</a>
         </p>
     </footer>
 
     <script>
+        let calculatedValue = "";
+
         function calculateReward() {
             const salary = parseFloat(document.getElementById('salary').value);
             const years = parseFloat(document.getElementById('years').value);
@@ -126,9 +163,23 @@
                 }
             }
 
-            document.getElementById('finalAmount').innerText = Math.round(finalReward).toLocaleString('ar-SA') + ' ريال';
+            calculatedValue = Math.round(finalReward).toLocaleString('ar-SA') + ' ريال';
+            document.getElementById('finalAmount').innerText = calculatedValue;
             document.getElementById('resultCard').style.display = 'block';
         }
+
+        function shareWhatsapp() {
+            const text = encodeURIComponent(`مكافأة نهاية الخدمة المتوقعة لخدمة ${document.getElementById('years').value} سنوات هي: ${calculatedValue}. احسب مستحقاتك مجاناً عبر الحاسبة: ` + window.location.href);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
+
+        function copyResult() {
+            navigator.clipboard.writeText(`مستحقات نهاية الخدمة: ${calculatedValue}`);
+            alert('تم نسخ النتيجة بنجاح!');
+        }
+
+        function showPrivacy() { document.getElementById('privacyModal').style.display = 'flex'; }
+        function closePrivacy() { document.getElementById('privacyModal').style.display = 'none'; }
     </script>
 </body>
 </html>
